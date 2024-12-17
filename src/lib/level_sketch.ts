@@ -241,17 +241,31 @@ export const sketch = (
             movingRight = false;
         }
     };
+    p.touchStarted = () => {
+        // console.log(p.touches);
+        if (p.touches.length == 0) {
+            return;
+        }
+        if ((p.touches[0] as any).x >= p.width / 2) {
+            movingRight = true;
+        } else {
+            movingLeft = true;
+        }
+    };
+    p.touchEnded = () => {
+        // console.log(p.touches);
+        movingRight = false;
+        movingLeft = false;
+    };
 
     const update = () => {
         let delta = p.deltaTime / 1000;
 
         if (song.seek() - startSeek >= nextTick / (data.bpm / 60)) {
-            console.log(nextTick);
             if (nextTick % 2 == 0) {
                 colorSwap = !colorSwap;
             }
             if (nextTick % 8 == 0 && nextTick != 0) {
-                console.log("gagaga");
                 if (Math.random() < 0.75) {
                     let sign = Math.sign(viewRotSpeed);
                     viewRotSpeed = Math.random() + 0.5;
