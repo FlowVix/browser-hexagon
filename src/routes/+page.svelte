@@ -10,16 +10,16 @@
         TRI_GAP_DOUBLE,
         TRI_GAP_TRIPLE_SWAP,
     } from "$lib/level_data";
-    import LevelPlay from "$lib/LevelPlay.svelte";
+    import LevelContainer from "$lib/LevelContainer.svelte";
     let playing = $state(false);
 </script>
 
 {#if playing}
     <div class="w-screen h-screen">
-        <LevelPlay
+        <LevelContainer
             data={{
                 song: "courtesy.mp3",
-                songStartTimes: [0.06, 51.76, 1 * 60 + 39.7],
+                songStartTimes: [0.06],
                 patterns: {
                     6: [
                         { pattern: HEX_0, weight: 2 },
@@ -39,5 +39,8 @@
         />
     </div>
 {:else}
-    <button class="text-9xl" onclick={() => (playing = true)}>Play</button>
+    <button
+        class="text-5xl font-title font-medium m-8 bg-black/50 border-2 border-white p-8 rounded-lg text-white"
+        onclick={() => (playing = true)}>Play</button
+    >
 {/if}

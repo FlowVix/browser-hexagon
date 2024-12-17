@@ -25,3 +25,10 @@ export const pointInTriangle = (
 
     return !(has_neg && has_pos);
 };
+
+const pad = (s: string, c: string, len: number) =>
+    c.repeat(Math.max(len - s.length, 0)) + s;
+export const fmtTime = (time: number) => [
+    pad(`${Math.floor(time / 60)}`, "0", 2),
+    pad(`${Math.floor(time % 60)}`, "0", 2),
+];
