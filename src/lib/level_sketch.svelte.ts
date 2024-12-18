@@ -111,7 +111,13 @@ export class LevelState {
     public bgBright: Color = [127, 1, 34];
     public wallDark: Color = [204, 2, 55];
     public wallBright: Color = [229, 2, 62];
-    public depthColor: Color = [102 / 2, 1 / 2, 27 / 2];
+    public depthColor: Color = [102 * 0.7, 1 * 0.7, 27 * 0.7];
+
+    // public bgDark: Color = [229, 249, 255];
+    // public bgBright: Color = [255, 255, 255];
+    // public wallDark: Color = [1, 183, 230];
+    // public wallBright: Color = [0, 204, 255];
+    // public depthColor: Color = [1 * 0.8, 183 * 0.8, 230 * 0.8];
 
     public colorSwap = false;
 
@@ -226,7 +232,7 @@ export class LevelState {
                 Math.floor(Math.random() * this.data.songStartTimes.length)
             ]
         );
-        // this.song.volume(0);
+        this.song.volume(0);
         this.song.play();
         this.nextTick = 0;
     }
@@ -292,6 +298,7 @@ export class LevelState {
 
             let canMoveLeft = true;
             let canMoveRight = true;
+            let moveAmount = delta * 8;
             this.forWallsSectioned(2, wall => {
                 let [a, b, c, d] = this.wallVertices(wall);
                 let playerPos: [number, number] = [
@@ -307,8 +314,8 @@ export class LevelState {
                 }
 
                 playerPos = [
-                    Math.cos(this.playerRot + delta * 8) * PLAYER_HEIGHT,
-                    Math.sin(this.playerRot + delta * 8) * PLAYER_HEIGHT,
+                    Math.cos(this.playerRot + moveAmount) * PLAYER_HEIGHT,
+                    Math.sin(this.playerRot + moveAmount) * PLAYER_HEIGHT,
                 ];
                 if (
                     pointInTriangle(playerPos, a, b, c) ||
@@ -317,8 +324,8 @@ export class LevelState {
                     canMoveLeft = false;
                 }
                 playerPos = [
-                    Math.cos(this.playerRot - delta * 8) * PLAYER_HEIGHT,
-                    Math.sin(this.playerRot - delta * 8) * PLAYER_HEIGHT,
+                    Math.cos(this.playerRot - moveAmount) * PLAYER_HEIGHT,
+                    Math.sin(this.playerRot - moveAmount) * PLAYER_HEIGHT,
                 ];
                 if (
                     pointInTriangle(playerPos, a, b, c) ||
@@ -336,11 +343,11 @@ export class LevelState {
             this.playerTiltTarget = 0;
             if (this.movingLeft && canMoveLeft) {
                 this.playerTiltTarget = 0.5;
-                this.playerRot += delta * 8;
+                this.playerRot += moveAmount;
             }
             if (this.movingRight && canMoveRight) {
                 this.playerTiltTarget = -0.5;
-                this.playerRot -= delta * 8;
+                this.playerRot -= moveAmount;
             }
             this.playerTilt = this.p.lerp(
                 this.playerTiltTarget,

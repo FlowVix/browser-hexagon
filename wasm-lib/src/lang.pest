@@ -1,0 +1,15 @@
+WHITESPACE = _{ " " | "\n" | "\t" | "\r" }
+
+ident_char_start = _{ 'a'..'z' | 'A'..'Z' | "_" }
+ident_char = _{ ident_char_start | '0'..'9' }
+
+number = @{ ASCII_DIGIT+ ~ ("." ~ ASCII_DIGIT+)? }
+identifier = @{ ident_char_start ~ ident_char* }
+
+
+unit = _{ number | identifier | ( "(" ~ expr ~ ")" ) }
+
+op_mult_div = { unit ~ (("*" | "/") ~ unit)* }
+op_plus_minus = { op_mult_div ~ (("+" | "-") ~ op_mult_div)* }
+
+expr = { op_plus_minus }

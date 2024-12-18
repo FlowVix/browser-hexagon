@@ -129,3 +129,27 @@ export const FLIP_FLOP: Pattern = () => {
 
     return [...side, ...side.map(w => rotWall(w, 3, 6))];
 };
+
+// export class PatternWall {
+//     constructor(
+//         public column: number,
+//         public pos: number,
+//         public size: number
+//     ) {}
+// }
+
+// export type PatternItem =
+//     | { type: "wall"; column: number; pos: number; size: number }
+//     | { type: "instance"; column: number; pos: number; size: number };
+// export type Pattern = {};
+// export type WeightedPatternList = { name: string; weight: number }[];
+
+// export type LevelData = {
+//     song: string;
+//     songStartTimes: number[];
+
+//     bpm: number;
+//     beatSize: number;
+
+//     patterns: LevelPatterns;
+// };

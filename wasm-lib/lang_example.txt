@@ -1,0 +1,11 @@
+
+
+
+
+
+wall(0, 1, 0.25); // adds a wall on column 0, pos 1, size 0.25
+pattern("globby", 2, 7); // instances a pattern and rotates it 2, boosts it 7 
+
+var f = (a, b) => a + b;
+
+

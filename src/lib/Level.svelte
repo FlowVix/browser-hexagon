@@ -1,6 +1,7 @@
 <svelte:options runes />
 
 <script lang="ts">
+    import { onMount } from "svelte";
     import type { LevelState } from "./level_sketch.svelte";
     import { fmtTime } from "./util";
     import { fade } from "svelte/transition";
@@ -8,6 +9,11 @@
     let { state }: { state: LevelState } = $props();
 
     let [mins, secs] = $derived(fmtTime(state.runTime));
+
+    let controlDiv: HTMLDivElement;
+    onMount(() => {
+        controlDiv.focus();
+    });
 </script>
 
 <svelte:window
@@ -49,5 +55,6 @@
                 state.keyPressed(e);
             }
         }}
+        bind:this={controlDiv}
     ></div>
 </div>
